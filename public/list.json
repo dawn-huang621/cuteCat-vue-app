@@ -1,0 +1,32 @@
+[
+  {
+    "name": "老大",
+    "cover": "images/cat001.jpg",
+    "price": 20
+  },
+  {
+    "name": "貝貝",
+    "cover": "images/cat002.jpg",
+    "price": 15
+  },
+  {
+    "name": "老虎",
+    "cover": "images/cat003.jpg",
+    "price": 10
+  },
+  {
+    "name": "胖胖",
+    "cover": "images/cat004.jpg",
+    "price": 8.5
+  },
+  {
+    "name": "小花",
+    "cover": "images/cat005.jpg",
+    "price": 9.99
+  },
+  {
+    "name": "黑臉",
+    "cover": "images/cat006.jpg",
+    "price": 12.5
+  }
+]
