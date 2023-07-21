@@ -11,16 +11,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="border-t">
-            <td class="pt-2 pb-2">老大</td>
-            <td>{{ $store.state.numberOfCats }}</td>
-            <td>15</td>
-            <td>15</td>
-          </tr>
-          <tr class="border-t py-4">
-            <td class="pt-2 pb-2">老大</td>
-            <td>1</td>
-            <td>15</td>
+          
+          <tr class="border-t" v-for="cat in catAll">
+            <td class="pt-2 pb-2">{{cat.name}}</td>
+            <td>{{ cat.amount }}</td>
+            <td>{{ cat.price }}</td>
             <td>15</td>
           </tr>
         </tbody>
@@ -38,10 +33,14 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex';
 export default {
     name: 'CountPrice',
+    computed: {
+    ...mapState(['catAll']), // 使用 mapState 将 "catAll" 映射到组件的计算属性中
+  },
 }
+
 </script>
 
 <style>
