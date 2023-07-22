@@ -4,50 +4,60 @@ import Vuex from "vuex"
 Vue.use(Vuex)
 
 const actions = {
-    // addCat(context, cat){
-    // },
-    countCat(context, cat){
-        console.log('泡1')
-        context.commit('ADDCAT', cat)
-        const target = state.catAll.find(item => item.name === cat.name);
-            if(target){
-                console.log('沒有相同');
-                context.commit('ADDCAT', cat)
-            }else{
-                console.log('相同');
-                context.commit('COUNTCAT', cat)
-                context.commit('ADDSAMECAT', cat)
-            }
+    showList({commit}, res){
+        commit('SHOWLIST', res)
+    },
+    addToCart({ commit }, cat) { 
+        commit('ADDCAT', cat)
     },
 }
 const mutations = {
-    COUNTCAT(state, cat){
-        state.addMount += 1
+    SHOWLIST(state, res){
+        state.catList = res
     },
-    ADDCAT(state, cat){
-        state.catAll.push({
-            amount: 1,
-            name: cat.name,
-            price: cat.price
-        })
-        // state.addMount = 0
+    ADDCAT(state, chooseCat){
+        const target = state.catCart.find(cat => cat.name === chooseCat.name);
+        if(!target){
+            state.catCart.push({
+                amount: 1,
+                name: chooseCat.name,
+                price: chooseCat.price,
+                subTotal: chooseCat.price,
+            })
+        } else {
+            target.amount ++,
+            target.subTotal += target.subTotal * target.amount
+        }
     },
-    ADDSAMECAT(state, cat){
-        // state.catAll.push({
-        //     amount: state.addMount,
-        //     name: cat.name,
-        //     price: cat.price
-        // })
-        // state.addMount = 0
-    },
+    CLEARTOCART(state){
+        state.catCart = []
+    }
 }
 const getters = {
-    
+    addShopList: (state) => {
+        return state.catCart.map(({ name, amount }) => {
+            const target = state.catCart.find(item => item.name === cat.name);
+            if (target) {//    如果存在该商品
+                return {//  返回对象
+                    ...target,
+                    amount
+                }
+            }
+        })
+    },
+    totalCount: (state)=>{
+        let total = 0
+        state.catCart.forEach((cat) => {
+            let countTime = 0
+            total += cat.subTotal
+        })
+        return Math.floor(total) 
+    }
 }
 
 const state = {
-    addMount: 0,
-    catAll:[]
+    catList: [],
+    catCart:[]
 }
 export default new Vuex.Store  ({
     actions,

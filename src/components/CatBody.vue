@@ -2,7 +2,7 @@
    <div>
         
         <div class="grid grid-cols-6 gap-4 mt-10 mb-10 justify-items-center">
-           <div class="cat-card" v-for="(item, index) in list">
+           <div class="cat-card" v-for="(item, index) in catList">
              <div class="max-w-sm w-48 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                  <img class="w-48 rounded-t-lg" :src="item.cover" alt="" />
                  <div class="p-5">
@@ -23,26 +23,29 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex';
+
 
 export default {
     name: 'CatBody',
     data(){
         return{
-            list: {}
         }
+    },
+    computed:{
+        ...mapState(['catList'])
     },
     methods: {
         buyCat(cat){
-            // this.$store.dispatch('addCat',cat)
-            this.$store.dispatch('countCat',cat)
+            this.$store.dispatch('addToCart',cat)
         },
     },
-    created(){    
+    created(){
         fetch('../../public/list.json')
         .then(d => d.json())
         .then(res => {
             console.log("fetch成功")
-            this.list = res;
+            this.$store.dispatch('showList',res)
         });
 
         // fetch('/comment.json')
