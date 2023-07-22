@@ -27,7 +27,7 @@ export default {
       <CatBody></CatBody>
       <CountPrice></CountPrice>
 
-      <button @click="clearCats" class="rounded-lg  border-gray-200 dark:bg-gray-900 dark:border-gray-700 text-white p-4 mt-5 mb-5 ml-4">清空購物車</button>
+      <button @click="clearCats"  class="rounded-lg bg-black dark:bg-gray-900 text-white p-4 mt-5 mb-5 ml-4">清空購物車</button>
     </main>
 
     <!-- modal -->
