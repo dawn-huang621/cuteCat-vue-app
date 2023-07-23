@@ -2,7 +2,7 @@
    <div>
         
         <div class="grid grid-cols-6 gap-4 mt-10 mb-10 justify-items-center">
-           <div class="cat-card" v-for="(item, index) in catList">
+           <div class="cat-card" v-for="(item, index) in searchCat">
              <div class="max-w-sm w-48 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                  <img class="w-48 rounded-t-lg" :src="item.cover" alt="" />
                  <div class="p-5">
@@ -33,7 +33,7 @@ export default {
         }
     },
     computed:{
-        ...mapState(['catList'])
+        ...mapState(['catList', 'searchCat'])
     },
     methods: {
         buyCat(cat){
@@ -41,19 +41,8 @@ export default {
         },
     },
     created(){
-        fetch('../../public/list.json')
-        .then(d => d.json())
-        .then(res => {
-            console.log("fetch成功")
-            this.$store.dispatch('showList',res)
-        });
+        this.$store.dispatch('showList',res)
 
-        // fetch('/comment.json')
-        // .then(d => d.json())
-        // .then(res => {
-        //     console.log("fetch成功")
-        //     commentLists = res;
-        // });
     }
 }
 </script>

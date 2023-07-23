@@ -5,7 +5,12 @@ Vue.use(Vuex)
 
 const actions = {
     showList({commit}, res){
-        commit('SHOWLIST', res)
+        fetch('../../public/list.json')
+        .then(d => d.json())
+        .then(res => {
+            console.log("fetch成功")
+            commit('SHOWLIST', res)
+        });
     },
     addToCart({ commit }, cat) { 
         commit('ADDCAT', cat)
@@ -14,6 +19,7 @@ const actions = {
 const mutations = {
     SHOWLIST(state, res){
         state.catList = res
+        state.searchCat = state.catList
     },
     ADDCAT(state, chooseCat){
         const target = state.catCart.find(cat => cat.name === chooseCat.name);
@@ -31,20 +37,14 @@ const mutations = {
     },
     CLEARTOCART(state){
         state.catCart = []
+    },
+    SEARCHE(state, searchCat){
+        state.searchCat = state.catList.filter(cat=>{
+            return cat.name.includes(searchCat)
+        })
     }
 }
 const getters = {
-    addShopList: (state) => {
-        return state.catCart.map(({ name, amount }) => {
-            const target = state.catCart.find(item => item.name === cat.name);
-            if (target) {//    如果存在该商品
-                return {//  返回对象
-                    ...target,
-                    amount
-                }
-            }
-        })
-    },
     totalCount: (state)=>{
         let total = 0
         state.catCart.forEach((cat) => {
@@ -56,6 +56,7 @@ const getters = {
 }
 
 const state = {
+    searchCat: [],
     catList: [],
     catCart:[]
 }
