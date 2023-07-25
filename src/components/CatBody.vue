@@ -37,7 +37,7 @@ export default {
     },
     methods: {
         buyCat(cat){
-            this.$store.dispatch('addToCart',cat)
+            this.$store.commit('ADDCAT',cat)
         },
     },
     mounted(){

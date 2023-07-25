@@ -12,9 +12,6 @@ const actions = {
             commit('SHOWLIST', res)
         });
     },
-    addToCart({ commit }, cat) { 
-        commit('ADDCAT', cat)
-    },
 }
 const mutations = {
     SHOWLIST(state, res){
@@ -65,10 +62,11 @@ const getters = {
     totalCount: (state)=>{
         let total = 0
         state.catCart.forEach((cat) => {
-            let countTime = 0
-            total += cat.subTotal
+            const subTotal = Math.round(cat.subTotal * 100); 
+            total += subTotal
         })
-        return Math.floor(total) 
+        // return Math.floor(total*100)/100 
+        return total.toFixed(2);
     },
 }
 
