@@ -45,6 +45,18 @@ const mutations = {
     }
 }
 const getters = {
+    addShopList: state => {
+        // map()方法返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值
+        return state.add.map(({ id, num }) => {
+            let product = state.shop_list.find(n => n.id == id)// find()方法返回通过测试(函数内判断)的数组的第一个元素的值，如果没有符合条件的元素返回undefined
+            if (product) {//    如果存在该商品
+                return {//  返回对象
+                    ...product,
+                    amount
+                }
+            }
+        })
+    },
     totalCount: (state)=>{
         let total = 0
         state.catCart.forEach((cat) => {

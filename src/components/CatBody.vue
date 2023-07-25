@@ -40,8 +40,8 @@ export default {
             this.$store.dispatch('addToCart',cat)
         },
     },
-    created(){
-        this.$store.dispatch('showList',res)
+    mounted(){
+        this.$store.dispatch('showList')
 
     }
 }
