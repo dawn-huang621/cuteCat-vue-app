@@ -38,10 +38,15 @@ const mutations = {
     CLEARTOCART(state){
         state.catCart = []
     },
-    SEARCHE(state, searchCat){
-        state.searchCat = state.catList.filter(cat=>{
-            return cat.name.includes(searchCat)
-        })
+    SEARCAT: (state, searchInput) => {
+        if(searchInput === ''){
+            state.searchCat = state.catList
+        } else {
+            state.searchCat = state.catList.filter(cat=>{
+                return cat.name.includes(searchInput)
+            })
+            
+        }
     }
 }
 const getters = {
@@ -64,13 +69,13 @@ const getters = {
             total += cat.subTotal
         })
         return Math.floor(total) 
-    }
+    },
 }
 
 const state = {
     searchCat: [],
     catList: [],
-    catCart:[]
+    catCart:[],
 }
 export default new Vuex.Store  ({
     actions,
