@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const actions = {
     showList({commit}, res){
-        fetch('https://transcendent-longma-9db833.netlify.app/src/assets/list.json')
+        fetch('list.json')
         .then(d => d.json())
         .then(res => {
             console.log("fetch成功")
