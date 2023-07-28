@@ -6,7 +6,6 @@ Vue.use(Vuex)
 const actions = {
     showList({commit}, res){
         fetch('/src/assets/list.json')
-        .then(d => d.json())
         .then(res => {
             console.log("fetch成功")
             commit('SHOWLIST', res)
